@@ -1,11 +1,11 @@
 import pandas as pd
 import numpy as np
 import scipy.stats
-
+import pytest
 
 def test_column_names(data):
 
-    expected_colums = [
+    expected_columns = [
         "id",
         "name",
         "host_id",
@@ -27,7 +27,7 @@ def test_column_names(data):
     these_columns = data.columns.to_numpy()  # Using to_numpy() for better performance
 
     # This also enforces the same order
-    assert np.array_equal(expected_colums, these_columns)  # Using numpy comparison for better performance
+    assert np.array_equal(expected_columns, these_columns)  # Using numpy comparison for better performance
 
 
 def test_neighborhood_names(data):
@@ -54,8 +54,10 @@ def test_similar_neigh_distrib(data: pd.DataFrame, ref_data: pd.DataFrame, kl_th
     Apply a threshold on the KL divergence to detect if the distribution of the new data is
     significantly different than that of the reference dataset
     """
-    dist1 = data['neighbourhood_group'].value_counts().sort_index()
-    dist2 = ref_data['neighbourhood_group'].value_counts().sort_index()
+    dist1 = data['neighbourhood_group'].value_counts(normalize=True).sort_index()
+    dist2 = ref_data['neighbourhood_group'].value_counts(normalize=True).sort_index()
+
+    dist1, dist2 = dist1.align(dist2, fill_value=0)
 
     assert scipy.stats.entropy(dist1, dist2, base=2) < kl_threshold
 
@@ -63,3 +65,10 @@ def test_similar_neigh_distrib(data: pd.DataFrame, ref_data: pd.DataFrame, kl_th
 ########################################################
 # Implement here test_row_count and test_price_range   #
 ########################################################
+def test_row_count(data):
+    assert 15000 < data.shape[0] < 1000000
+
+
+def test_price_range(data, min_price, max_price):
+    assert data["price"].notnull().all()
+    assert data["price"].between(min_price, max_price).all()
