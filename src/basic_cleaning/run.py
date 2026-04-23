@@ -43,7 +43,7 @@ def go(args):
     logger.info("Cleaned data has %s rows and %s columns", *df.shape)
 
     # Save cleaned data
-    df.to_csv("clean_sample.csv", index=False)
+    df.to_csv("sample.csv", index=False)
 
     # Log the cleaned dataset as a new artifact
     artifact = wandb.Artifact(
@@ -51,7 +51,7 @@ def go(args):
         type=args.output_type,
         description=args.output_description,
     )
-    artifact.add_file("clean_sample.csv")
+    artifact.add_file("sample.csv")
     run.log_artifact(artifact)
 
 if __name__ == "__main__":
