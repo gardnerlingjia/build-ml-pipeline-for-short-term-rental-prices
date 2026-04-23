@@ -5,12 +5,12 @@ entry_points:
   main:
     parameters:
 
-      input_artifact:
-        description: input_artifact
+      input_name:
+        description: input_name
         type: str
 
-      output_artifact:
-        description: output_artifact
+      output_name:
+        description: output_name
         type: str
 
       output_type:
@@ -31,8 +31,8 @@ entry_points:
 
     command: >-
       python run.py
-      --input_artifact {input_artifact}
-      --output_artifact {output_artifact}
+      --input_name {input_name}
+      --output_name {output_name}
       --output_type {output_type}
       --output_description {output_description}
       --min_price {min_price}

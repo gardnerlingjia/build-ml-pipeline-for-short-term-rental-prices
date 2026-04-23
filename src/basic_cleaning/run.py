@@ -22,10 +22,10 @@ def go(args):
 
     # Download input artifact. This will also log that this script is using this
     # particular version of the artifact
-    # artifact_local_path = run.use_artifact(args.input_artifact).file()
+    # artifact_local_path = run.use_artifact(args.input_name).file()
 
     # Download input artifact
-    artifact_local_path = run.use_artifact(args.input_artifact).file()
+    artifact_local_path = run.use_artifact(args.input_name).file()
 
     # Read data
     df = pd.read_csv(artifact_local_path)
@@ -47,7 +47,7 @@ def go(args):
 
     # Log the cleaned dataset as a new artifact
     artifact = wandb.Artifact(
-        args.output_artifact,
+        args.output_name,
         type=args.output_type,
         description=args.output_description,
     )
@@ -60,14 +60,14 @@ if __name__ == "__main__":
 
 
     parser.add_argument(
-        "--input_artifact", 
+        "--input_name", 
         type=str,
         help="Fully-qualified name for the input artifact to clean",
         required=True
     )
 
     parser.add_argument(
-        "--output_artifact", 
+        "--output_name", 
         type=str,
         help="Name for the output cleaned artifact",
         required=True
