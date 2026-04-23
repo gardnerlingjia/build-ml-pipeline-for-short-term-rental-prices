@@ -20,7 +20,7 @@ def go(args):
 
     run = wandb.init(
         project="nyc_airbnb",
-        entity="gardner-lingjia-01",
+        entity="gardner-lingjia-cariad",
         job_type="download_file"
     )
 
