@@ -11,6 +11,13 @@ In this project you will build such a pipeline.
 - GitHub Repository: https://github.com/gardnerlingjia/build-ml-pipeline-for-short-term-rental-prices
 - Public W&B Project: https://wandb.ai/gardner-lingjia-cariad/nyc_airbnb
 
+## Train the Model on a New Data Sample
+
+1.0.0 = before the NYC boundary cleaning fix, fails on sample2.csv
+1.0.1 (or 1.0.2) = first release containing the fix in basic_cleaning
+1.0.11 = latest release in the final submitted repo
+Release `1.0.0` represents the pipeline before the NYC-boundary cleaning fix and fails on `sample2.csv`. The cleaning fix was introduced in release `1.0.1` (also present in later releases), where `basic_cleaning` filters listings outside the NYC latitude/longitude bounds. The final submitted repository is at release `1.0.11`, which includes this fix and runs successfully on `sample2.csv`, producing a new trained model.
+
 ## Project Summary
 
 This project builds an end-to-end machine learning pipeline that:
