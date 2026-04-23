@@ -13,10 +13,10 @@ In this project you will build such a pipeline.
 
 ## Train the Model on a New Data Sample
 
-1.0.0 = before the NYC boundary cleaning fix, fails on sample2.csv
-1.0.1 (or 1.0.2) = first release containing the fix in basic_cleaning
-1.0.11 = latest release in the final submitted repo
-Release `1.0.0` represents the pipeline before the NYC-boundary cleaning fix and fails on `sample2.csv`. The cleaning fix was introduced in release `1.0.1` (also present in later releases), where `basic_cleaning` filters listings outside the NYC latitude/longitude bounds. The final submitted repository is at release `1.0.11`, which includes this fix and runs successfully on `sample2.csv`, producing a new trained model.
+- `1.0.0`: release before the NYC-boundary cleaning fix; this version fails on `sample2.csv`
+- `1.0.1`: first release containing the fix in `basic_cleaning`
+- `1.0.12`: release after the successful rerun on `sample2.csv`
+Release `1.0.0` represents the pipeline before the NYC-boundary cleaning fix and fails on `sample2.csv` because that sample contains listings outside the NYC area. The cleaning fix was introduced in release `1.0.1`, where `basic_cleaning` filters rows outside the valid NYC longitude/latitude bounds. After uploading `sample2.csv` as a W&B artifact and rerunning the pipeline successfully, I created release `1.0.12`, which produces a new trained model from the new sample.
 
 ## Project Summary
 
@@ -43,16 +43,16 @@ The final submitted model artifact is stored in W&B as an MLflow-exported sklear
    cd build-ml-pipeline-for-short-term-rental-prices
 
 2. Create and activate the conda environment:
-   conda env create -f conda.yml
-   conda activate nyc_airbnb_dev
+    conda env create -f conda.yml
+    conda activate mlops-course
 
-3. Run the full pipeline:
+4. Run the full pipeline:
    python main.py
 
-4. Run the random forest hyperparameter sweep:
-   python main.py --multirun main.steps=train_random_forest modeling.random_forest.max_depth=5,10,15         modeling.random_forest.n_estimators=50,100
+5. Run the random forest hyperparameter sweep:
+   python main.py --multirun main.steps=train_random_forest modeling.random_forest.max_depth=5,10,15 modeling.random_forest.n_estimators=50,100
 
-5. Check results in the public W&B project:
+6. Check results in the public W&B project:
    https://wandb.ai/gardner-lingjia-cariad/nyc_airbnb
 
 
