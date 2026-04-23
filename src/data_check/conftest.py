@@ -15,7 +15,7 @@ def pytest_addoption(parser):
 def data(request):
     run = wandb.init(
         project="nyc_airbnb",
-        entity="gardner-lingjia-01",
+        entity="gardner-lingjia-cariad",
         job_type="data_tests",
         resume=True
     )
@@ -36,7 +36,7 @@ def data(request):
 def ref_data(request):
     run = wandb.init(
         project="nyc_airbnb",
-        entity="gardner-lingjia-01",
+        entity="gardner-lingjia-cariad",
         job_type="data_tests",
         resume=True
     )
